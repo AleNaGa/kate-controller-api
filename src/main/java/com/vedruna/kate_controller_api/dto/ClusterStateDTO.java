@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-class ClusterStateDTO {
+public class ClusterStateDTO {
     List<NodeDTO> nodes;
     List<DeploymentDTO> deployments;
     List<ServiceDTO> services;
