@@ -12,7 +12,7 @@ public class KubernetesClientFactory {
         Config config = new ConfigBuilder()
                 .withMasterUrl(apiServerUrl.trim())
                 .withOauthToken(token)
-                .withTrustCerts(true) // Habilitar la verificación de certificados (solo en desarrollo)
+                .withTrustCerts(true) // Certificación válida
                 .build();
 
         return new DefaultKubernetesClient(config);
