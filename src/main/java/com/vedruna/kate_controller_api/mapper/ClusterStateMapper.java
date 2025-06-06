@@ -9,6 +9,8 @@ import io.fabric8.kubernetes.client.KubernetesClient;
 
 public class ClusterStateMapper {
 
+    private ClusterStateMapper() {}
+
     public static ClusterStateDTO buildClusterState(KubernetesClient client) {
         ClusterStateDTO dto = new ClusterStateDTO();
 
