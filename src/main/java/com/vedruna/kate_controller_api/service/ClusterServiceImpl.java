@@ -1,4 +1,4 @@
-package com.vedruna.kate_controller_api.services;
+package com.vedruna.kate_controller_api.service;
 
 import org.springframework.stereotype.Service;
 
@@ -13,10 +13,8 @@ public class ClusterServiceImpl implements ClusterServiceI {
 
     @Override
     public ClusterStateDTO getClusterState(String apiServerUrl, String token) {
-        // Crear el cliente con la URL del API y el token que vienen del front
-        KubernetesClient client = KubernetesClientFactory.getClient(apiServerUrl, token);
-
-        // Construir el DTO con los datos del cluster
-        return ClusterStateMapper.buildClusterState(client);
+        try (KubernetesClient client = KubernetesClientFactory.getClient(apiServerUrl, token)) {
+            return ClusterStateMapper.buildClusterState(client);
+        }
     }
 }
