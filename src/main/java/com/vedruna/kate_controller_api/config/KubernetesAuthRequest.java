@@ -7,4 +7,3 @@ public class KubernetesAuthRequest {
     private String apiServerUrl;
     private String token;
 }
-

@@ -1,4 +1,4 @@
-package com.vedruna.kate_controller_api.services;
+package com.vedruna.kate_controller_api.service;
 
 import com.vedruna.kate_controller_api.dto.ClusterStateDTO;
 
