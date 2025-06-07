@@ -10,6 +10,12 @@ import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+    /**
+     * Maneja la excepción IllegalArgumentException y devuelve una respuesta con un error 400.
+     *
+     * @param ex La excepción IllegalArgumentException
+     * @return Una respuesta con un error 400 de ResponseEntity
+     */
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<?> handleIllegalArgument(IllegalArgumentException ex) {
         return ResponseEntity.badRequest().body(Map.of(
@@ -19,6 +25,13 @@ public class GlobalExceptionHandler {
         ));
     }
 
+
+    /**
+     * Maneja la excepción Exception genérica y devuelve una respuesta con un error 500.
+     *
+     * @param ex La excepción Exception
+     * @return Una respuesta con un error 500 de ResponseEntity
+     */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleGenericException(Exception ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(

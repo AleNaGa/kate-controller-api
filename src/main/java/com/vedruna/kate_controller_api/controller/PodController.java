@@ -13,6 +13,10 @@ import com.vedruna.kate_controller_api.dto.PodScaleRequestDTO;
 import com.vedruna.kate_controller_api.service.PodServiceI;
 import com.vedruna.kate_controller_api.session.ClusterSessionManager;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestController
 @RequestMapping("/api/pod")
 public class PodController {
@@ -26,13 +30,18 @@ public class PodController {
      * Escala un deployment en un namespace y con un nombre dado a 0 réplicas.
      * Básicamente "apaga" el deployment
      *
-     * @param sessionId Id de sesió
+     * @param sessionId Id de sesióm
      * @param request Información del deployment a escalar:
      *                - namespace: Namespace en el que se encuentra el deployment
      *                - deploymentName: Nombre del deployment a escalar
      *
      * @return Mensaje de "Deployment escalado a 0 rplicas correctamente" en caso de éxito
      */
+    @Operation(summary = "Escala un deployment a 0 réplicas (apagar deployment)")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Deployment escalado a 0 réplicas correctamente"),
+        @ApiResponse(responseCode = "401", description = "Sesión no válida")
+    })
     @PostMapping("/scale-down")
     public ResponseEntity<String> scaleDownDeployment(
             @RequestHeader("X-Session-Id") String sessionId,
@@ -52,16 +61,22 @@ public class PodController {
 
 
     /**
-     * Escala un deployment en un namespace y con un nombre dado a 1 réplica.
+     * Escala un deployment en un namespace y con un nombre dado a x réplicas.
      * Básicamente "enciende" el deployment
      *
      * @param sessionId Id de sesión
      * @param request Información del deployment a escalar:
      *                - namespace: Namespace en el que se encuentra el deployment
      *                - deploymentName: Nombre del deployment a escalar
+     *                - replicas: Número de réplicas
      *
-     * @return Mensaje de "Deployment escalado a 1 réplica correctamente." en caso de éxito
+     * @return Mensaje de "Deployment escalado a x réplica correctamente." en caso de éxito
      */
+    @Operation(summary = "Escala un deployment a un número determinado de réplicas (enciende el deployment)")
+        @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Deployment escalado correctamente"),
+        @ApiResponse(responseCode = "401", description = "Sesión no válida")
+        })
     @PostMapping("/scale-up")
     public ResponseEntity<String> scaleUpDeployment(
             @RequestHeader("X-Session-Id") String sessionId,
@@ -77,6 +92,6 @@ public class PodController {
                 request.getDeploymentName(), 
                 request.getReplicas());// Escala a x réplicas
 
-        return ResponseEntity.ok("Deployment escalado a"+ request.getReplicas() + "réplicas correctamente.");
+        return ResponseEntity.ok("Deployment escalado a "+ request.getReplicas() + " réplicas correctamente.");
     }
 }
