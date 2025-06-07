@@ -11,6 +11,13 @@ public class ClusterStateMapper {
 
     private ClusterStateMapper() {}
 
+    /**
+     * Crea un objeto ClusterStateDTO a partir de la información de todos los objetos
+     * del cluster.
+     *
+     * @param client Cliente Kubernetes para obtener la información del cluster.
+     * @return Objeto ClusterStateDTO con la información del cluster.
+     */
     public static ClusterStateDTO buildClusterState(KubernetesClient client) {
         ClusterStateDTO dto = new ClusterStateDTO();
 
