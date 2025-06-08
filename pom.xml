@@ -52,6 +52,13 @@
             <version>6.12.1</version>
         </dependency>
 
+        <!-- Swagger -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.6.15</version> <!-- o la última versión -->
+        </dependency>
+
         <!-- Lombok para no tener que poner getters y setters -->
         <dependency>
             <groupId>org.projectlombok</groupId>
